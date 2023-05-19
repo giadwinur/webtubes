@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kalkulator invers matriks</title>
+    <link rel="stylesheet" type="text/css" href="css/style2.css" />
+    <meta
+      name="description"
+      content="Gunakan kalkulator invers matriks untuk menemukan matriks invers 3x3, 4x4, nxn dengan mudah dan cepat."
+    />
+    <meta
+      name="naver-site-verification"
+      content="52fe109286f2d60b23748acdb5472ded63aee2e0"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XK9NHJW4W9"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-XK9NHJW4W9");
+    </script>
+    <link rel="stylesheet" href="/static/matrix/css/inverse.css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1 minimum-scale=1, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML"
+      type="text/javascript"
+    ></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/static/matrix/image/favicon.png" />
+  </head>
+  <body>
+    <!-- loader -->
+    <div class="bg-loader">
+      <div class="loader"></div>
+    </div>
+    <!-- header -->
+    <div class="medsos">
+      <div class="container">
+        <ul>
+          <li>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <header>
+      <div class="container">
+        <h1><a href="index.html">PROJECT KALKULUS II</a></h1>
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="materi.html">MATERI</a></li>
+          <li class="active"><a href="hitung.html">HITUNG</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+    </header>
+    <!-- label -->
+    <section class="label">
+      <div class="container">
+        <p>Home / Hitung</p>
+      </div>
+    </section>
+    <div class="head"></div>
+    <div id="title-lang">
+      <h1 class="nama">Kalkulator invers matriks</h1>
+      <a href="/in/deter"><i class="arrow right"></i></a>
+    </div>
+    <br />
+    <div id="size">
+      <h2>Ukuran matriks</h2>
+      <input type="text" id="inputNumber" onkeyup="makeMatrix()" value=" " />
+    </div>
+    <br />
+    <div>
+      <p id="example"></p>
+    </div>
+    <div id="matrix">
+      <div id="matrix-1" onkeydown="Arrow()">
+        <div class="matrixClass">
+          <input id="0-0" />
+          <input id="0-1" />
+          <input id="0-2" />
+        </div>
+        <div class="matrixClass">
+          <input id="1-0" />
+          <input id="1-1" />
+          <input id="1-2" />
+        </div>
+        <div class="matrixClass">
+          <input id="2-0" />
+          <input id="2-1" />
+          <input id="2-2" />
+        </div>
+      </div>
+    </div>
+    <br />
+    <div id="det">
+      <button onclick="inverse();" id="detButton">Hitung</button>
+      <br />
+      <button type="button" class="btn-primary" onclick="clearFields()">
+        Hapus
+      </button>
+    </div>
+    <br />
+    <div id="output"></div>
+    <div id="result">
+      <p id="inverse">Hasil :</p>
+    </div>
+    <div class="test">
+      <button id="simpan">simpan</button>
+      <button id="tampil">tampil</button>
+      <button id="riwayat">Hapus History</button>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
