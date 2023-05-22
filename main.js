@@ -78,7 +78,7 @@ const gcd = (a, b) => {
 
 const makeMatrix = () => {
   const val = document.getElementById("inputNumber").value;
-  if (val < 7 && 1 < val) {
+  if (val < 8 && 1 < val) {
     const element = document.getElementById("matrix-1");
     element.parentNode.removeChild(element);
     let mat = document.getElementById("matrix");
@@ -99,7 +99,7 @@ const makeMatrix = () => {
         mat.appendChild(newInputTag);
       }
     }
-  } else if (val >= 7) {
+  } else if (val >= 8) {
     document.getElementById("matrix-1").innerHTML = "TOO BIG!";
   } else if (val <= 1) {
     document.getElementById("matrix-1").innerHTML = "TOO SMALL!";
@@ -120,13 +120,14 @@ const det = () => {
       }
     }
     if (detCalc(detMatrix)[1] === 1) {
+      // let detResult = detCalc(detMatrix)[0];
       document.getElementById("detValue").innerHTML =
-        document.getElementById("detValue").innerHTML +
-        `${detCalc(detMatrix)[0]}`;
+        document.getElementById("detValue").innerHTML + `${detResult}`;
+      // addToHistory(`inverse matriks: ${JSON.stringify(detMatrix)}`, detResult);
     } else if (detCalc(detMatrix)[1] === -1) {
+      // let detResult = detCalc(detMatrix)[0];
       document.getElementById("detValue").innerHTML =
-        document.getElementById("detValue").innerHTML +
-        `${detCalc(detMatrix)[0] * Math.pow(-1, 1)}`;
+        document.getElementById("detValue").innerHTML + `-${detResult}`;
     } else if (detCalc(detMatrix)[0] === 0) {
       document.getElementById("detValue").innerHTML =
         document.getElementById("detValue").innerHTML + `0`;
@@ -188,10 +189,13 @@ const detCalc = (arr) => {
   }
 };
 
+let history = [];
+
 const inverse = () => {
   try {
     let val = document.getElementById("inputNumber").value;
     val = parseInt(val);
+
     let jaxString =
       document.getElementById("inverse").innerHTML + "$\\begin{pmatrix}";
     jaxString = jaxString.split(":")[0] + ": " + "$\\begin{pmatrix}";
@@ -208,9 +212,6 @@ const inverse = () => {
     if (detCalc(numMatrix)[0] === 0) {
       if (window.location.href.includes("en")) {
         document.getElementById("inverse").innerHTML = "Result : Not exist!";
-      } else if (window.location.href.includes("sp")) {
-        document.getElementById("inverse").innerHTML =
-          "Matriz inversa : ¡No existe!";
       } else if (window.location.href.includes("in")) {
         document.getElementById("inverse").innerHTML = "Hasil : Tidak ada!";
       }
@@ -269,12 +270,48 @@ const inverse = () => {
       let jaxJax = jaxString + "\\end{pmatrix}$";
       document.getElementById("inverse").innerHTML = jaxJax;
       MathJax.Hub.Queue(["Typeset", MathJax.Hub, "inverse"]);
+
+      history.push({ val, jaxMatrix });
+      localStorage.setItem("history", JSON.stringify(history));
+
+      // Output history
+      console.log(history);
     }
   } catch {
     document.getElementById("inverse").innerHTML =
       document.getElementById("inverse").innerHTML.split(":")[0] + ": Error";
   }
 };
+
+function cobaAkses() {
+  try {
+    // akses data dari storage
+    let history = JSON.parse(localStorage.getItem("history"));
+    let riwayatElement = document.getElementById("riwayat");
+    riwayatElement.innerHTML = "History :";
+
+    history.forEach(function (data) {
+      let li = document.createElement("li");
+      let value = data.val;
+      let jaxMatrix = data.jaxMatrix;
+      let mathJaxString = `Value: ${value}, Matrix: $\\begin{pmatrix}${jaxMatrix.join(
+        " \\\\ "
+      )}\\end{pmatrix}$`;
+      li.innerHTML = mathJaxString;
+      riwayatElement.appendChild(li);
+    });
+    // Render MathJax
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "riwayat"]);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function hapusHistory() {
+  localStorage.removeItem("history");
+  history = [];
+  document.getElementById("riwayat").innerHTML = "History :"; // Menghapus tampilan history di halaman web
+}
 
 const gauss = (arra) => {
   let len = arra[0].length;
@@ -358,55 +395,20 @@ const gauss = (arra) => {
   return ideal;
 };
 
-if (window.location.href.includes("en")) {
-  document.getElementById("example").innerHTML = `Input example : 1/2, 0.3, 1`;
-} else if (window.location.href.includes("sp")) {
-  document.getElementById(
-    "example"
-  ).innerHTML = `Ejemplo de entrada : 1/2, 0.3, 1`;
-} else if (window.location.href.includes("vi")) {
-  document.getElementById("example").innerHTML = `Ví dụ đầu vào : 1/2, 0.3, 1`;
-} else if (window.location.href.includes("po")) {
-  document.getElementById(
-    "example"
-  ).innerHTML = `Exemplo de entrada : 1/2, 0.3, 1`;
-} else if (window.location.href.includes("in")) {
-  document.getElementById("example").innerHTML = `Contoh masukan : 1/2, 0.3, 1`;
-}
-
 document.getElementById("matrix-1").addEventListener("click", function (event) {
   event.preventDefault();
 });
 
-// Fungsi untuk menghapus invers matriks dari inputan
-const clearInverseMatrix = () => {
-  document.getElementById("inverseMatrix").innerHTML = "";
+const clearFields = () => {
+  let matrixElements = document.getElementsByClassName("matrixClass");
+  for (let i = 0; i < matrixElements.length; i++) {
+    let inputs = matrixElements[i].getElementsByTagName("input");
+    for (let j = 0; j < inputs.length; j++) {
+      inputs[j].value = "";
+    }
+  }
 };
 
-// Fungsi untuk menghapus inputan matriks, hasil perhitungan, dan invers matriks
-const clearAll = () => {
-  clearMatrix();
-  clearInverseMatrix();
-};
-
-// Panggil fungsi clearAll() saat tombol "Hapus Semua" diklik
-document.getElementById("clearButton").addEventListener("click", clearAll);
-function clearFields() {
-  // Reset input fields and output
-  document.getElementById("0-0").value = "";
-  document.getElementById("0-1").value = "";
-  document.getElementById("0-2").value = "";
-  document.getElementById("1-0").value = "";
-  document.getElementById("1-1").value = "";
-  document.getElementById("1-2").value = "";
-  document.getElementById("2-0").value = "";
-  document.getElementById("2-1").value = "";
-  document.getElementById("2-2").value = "";
-  document.getElementById("2-2").value = "";
-  document.getElementById("2-2").value = "";
-
-  document.getElementById("result").innerHTML = "";
-}
 const Arrow = () => {
   let length = document.getElementById("inputNumber").value;
   if (event.key === "ArrowRight") {

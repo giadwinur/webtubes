@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Kalkulator invers matriks</title>
+    <title>Kalkulator Invers Matriks</title>
     <link rel="stylesheet" type="text/css" href="css/style2.css" />
     <meta
       name="description"
@@ -92,18 +92,15 @@
     </section>
     <div class="head"></div>
     <div id="title-lang">
-      <h1 class="nama">Kalkulator invers matriks</h1>
+      <h1 class="nama">Kalkulator Invers Matriks</h1>
       <a href="/in/deter"><i class="arrow right"></i></a>
     </div>
     <br />
     <div id="size">
-      <h2>Ukuran matriks</h2>
+      <h2>Ukuran Matriks</h2>
       <input type="text" id="inputNumber" onkeyup="makeMatrix()" value=" " />
     </div>
     <br />
-    <div>
-      <p id="example"></p>
-    </div>
     <div id="matrix">
       <div id="matrix-1" onkeydown="Arrow()">
         <div class="matrixClass">
@@ -131,16 +128,24 @@
         Hapus
       </button>
     </div>
-    <br />
-    <div id="output"></div>
     <div id="result">
       <p id="inverse">Hasil :</p>
     </div>
     <div class="test">
-      <button id="simpan">simpan</button>
-      <button id="tampil">tampil</button>
-      <button id="riwayat">Hapus History</button>
+      <button type="button" ,id="tampil" , onclick="cobaAkses();">
+        Tampilkan History
+      </button>
+      <br />
+      <button type="button" , id="hapus" , onclick="hapusHistory();">
+        Hapus History
+      </button>
     </div>
+    <div id="histo">
+      <ul id="riwayat">
+        <p>History :</p>
+      </ul>
+    </div>
+    <div id="output"></div>
     <script src="main.js"></script>
   </body>
 </html>

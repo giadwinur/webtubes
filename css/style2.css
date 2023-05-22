@@ -45,6 +45,15 @@ a {
 
 }
 
+
+.test {
+  padding: 25px;
+}
+
+#inverse {
+  padding: 10px;
+}
+
 .container2 {
   display: flex;
   justify-content: center;
@@ -289,8 +298,6 @@ footer {
   font-size: 20px;
 }
 
-
-
 #det {
   display: flex;
   justify-content: center;
@@ -303,6 +310,7 @@ footer {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
 }
 
 #matrix {
@@ -343,6 +351,18 @@ footer {
   flex-direction: row;
   gap: 10px;
 
+}
+
+#histo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#riwayat {
+  text-align: center;
+  list-style: square inside;
+  font-style: arial;
 }
 
 .button {
